@@ -1,0 +1,5 @@
+<!-- just a little test -->
+<test>
+  <dog name="fido" age="12" />
+  <message>Hello world!</message>
+</test>
