@@ -51,7 +51,7 @@ Xml: class {
 
 XmlEntity: class {
 	addCallback: extern(mxmlEntityAddCallback) static func (cb:XmlEntityCallback) -> Int
-	getName: extern(mxmlEntityGetName) static func (val:Int) -> CString
+_getName: extern(mxmlEntityGetName) static func (val:Int) -> CString
 	getValue: extern(mxmlEntityGetValue) static func (name:CString) -> Int
 	removeCallback: extern(mxmlEntityRemoveCallback) static func (cb:XmlEntityCallback)
 }
@@ -71,7 +71,7 @@ XmlNode: cover from mxml_node_t* {
 	add: extern(mxmlAdd) func (where:Int, child, node:XmlNode)
 	delete: extern(mxmlDelete) func
 	deleteAttr: extern(mxmlElementDeleteAttr) func (name:CString)
-	getAttr: extern(mxmlElementGetAttr) func (name:CString) -> CString
+	getAttr: func (name:String) -> String { _getAttr(name) toString() }
 	setAttr: extern(mxmlElementSetAttr) func (name, value:CString)
 	setAttrf: extern(mxmlElementSetAttrf) func (name, format:CString, ...)
 	
@@ -82,19 +82,19 @@ XmlNode: cover from mxml_node_t* {
 	findElement: func~descend (top:XmlNode, name, attr, val:CString) -> XmlNode { findElement(top, name, attr, val, MXML_DESCEND) }
 	
 	findPath: extern(mxmlFindPath) func (path:CString) -> XmlNode
-	getCDATA: extern(mxmlGetCDATA) func -> CString
+	getCDATA: func -> String { _getCDATA() toString() }
 	getCustom: extern(mxmlGetCustom) func -> Pointer
-	getElement: extern(mxmlGetElement) func -> CString
+	getElement: func -> String { _getElement() toString() }
 	getFirstChild: extern(mxmlGetFirstChild) func -> XmlNode
 	getInteger: extern(mxmlGetInteger) func -> Int
 	getLastChild: extern(mxmlGetLastChild) func -> XmlNode
 	getNextSibling: extern(mxmlGetNextSibling) func -> XmlNode
-	getOpaque: extern(mxmlGetOpaque) func -> CString
+	getOpaque: func -> String { _getOpaque() toString() }
 	getParent: extern(mxmlGetParent) func -> XmlNode
 	getPrevSibling: extern(mxmlGetPrevSibling) func -> XmlNode
 	getReal: extern(mxmlGetReal) func -> Double
 	getRefCount: extern(mxmlGetRefCount) func -> Int
-	getText: extern(mxmlGetText) func (whitespace:Int*) -> CString
+	getText: func (whitespace:Int*) -> String { _getText(whitespace) toString() }
 	getType: extern(mxmlGetType) func -> XmlNodeType
 	getUserData: extern(mxmlGetUserData) func -> Pointer
 	
@@ -113,7 +113,7 @@ XmlNode: cover from mxml_node_t* {
 	release: extern(mxmlRelease) func -> Int
 	remove: extern(mxmlRemove) func
 	retain: extern(mxmlRetain) func -> Int
-	saveAllocString: extern(mxmlSaveAllocString) func (node:XmlNode, cb:XmlSaveCallback) -> CString
+	saveAllocString: func (cb:XmlSaveCallback) -> String { _saveAllocString(cb) toString() }
 	saveFd: extern(mxmlSaveFd) func (fd:Int, cb:XmlSaveCallback) -> Int
 	saveFile: extern(mxmlSaveFile) func (fp:FStream, cb:XmlSaveCallback) -> Int
 	saveString: extern(mxmlSaveString) func (buffer:CString, bufsize:Int, cb:XmlSaveCallback) -> Int
@@ -134,6 +134,14 @@ XmlNode: cover from mxml_node_t* {
 	setUserData: extern(mxmlSetUserData) func (data:Pointer) -> Int
 	walkNext: extern(mxmlWalkNext) func (descend:Int) -> XmlNode
 	walkPrev: extern(mxmlWalkPrev) func (descend:Int) -> XmlNode
+	
+	// Functions that return CStrings
+	_getAttr: extern(mxmlElementGetAttr) func (name:CString) -> CString
+	_getCDATA: extern(mxmlGetCDATA) func -> CString
+	_getElement: extern(mxmlGetElement) func -> CString
+	_getOpaque: extern(mxmlGetOpaque) func -> CString
+	_getText: extern(mxmlGetText) func (whitespace:Int*) -> CString
+	_saveAllocString: extern(mxmlSaveAllocString) func (cb:XmlSaveCallback) -> CString
 }
 
 XmlIndex: cover from mxml_index_t* {

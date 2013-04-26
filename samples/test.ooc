@@ -10,12 +10,12 @@ main: func {
 	
 	// find a node and access some attributes
 	dog := tree findElement(tree, "dog")
-	dog getAttr("name") toString() println()
-	dog getAttr("age") toString() println()
+	dog getAttr("name") println()
+	dog getAttr("age") println()
 	
 	// find a node and get its contents
 	message := tree findElement(tree, "message")
-	message getOpaque() toString() println()
+	message getOpaque() println()
 	
 	// recursively free everything
 	tree delete()
