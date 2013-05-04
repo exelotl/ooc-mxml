@@ -132,8 +132,8 @@ XmlNode: cover from mxml_node_t* {
 	setTextf: extern(mxmlSetTextf) func (whitespace:Int, format:CString, ...) -> Int
 	
 	setUserData: extern(mxmlSetUserData) func (data:Pointer) -> Int
-	walkNext: extern(mxmlWalkNext) func (descend:Int) -> XmlNode
-	walkPrev: extern(mxmlWalkPrev) func (descend:Int) -> XmlNode
+	walkNext: extern(mxmlWalkNext) func (top:XmlNode, descend:Int) -> XmlNode
+	walkPrev: extern(mxmlWalkPrev) func (top:XmlNode, descend:Int) -> XmlNode
 	
 	// Functions that return CStrings
 	_getAttr: extern(mxmlElementGetAttr) func (name:CString) -> CString
