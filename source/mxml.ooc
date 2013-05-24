@@ -51,7 +51,7 @@ Xml: class {
 
 XmlEntity: class {
 	addCallback: extern(mxmlEntityAddCallback) static func (cb:XmlEntityCallback) -> Int
-_getName: extern(mxmlEntityGetName) static func (val:Int) -> CString
+	_getName: extern(mxmlEntityGetName) static func (val:Int) -> CString
 	getValue: extern(mxmlEntityGetValue) static func (name:CString) -> Int
 	removeCallback: extern(mxmlEntityRemoveCallback) static func (cb:XmlEntityCallback)
 }
