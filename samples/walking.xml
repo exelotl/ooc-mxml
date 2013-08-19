@@ -1,0 +1,19 @@
+<my_data>
+	<group name="inventory">
+		<item type="sword" />
+		<item type="spellbook">Abra kadabra!</item>
+		<item type="bow" />
+		<group name="gem pouch">
+			<item type="ruby" />
+			<item type="diamond" />
+		</group>
+	</group>
+	<group name="body">
+		<item type="helmet" />
+		<item type="chainmail" />
+		<item type="greaves" />
+	</group>
+</my_data>
+
+<!-- You shouldn't get this far -->
+<item type="not part of the data" />

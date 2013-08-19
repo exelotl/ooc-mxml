@@ -135,6 +135,30 @@ XmlNode: cover from mxml_node_t* {
 	walkNext: extern(mxmlWalkNext) func (top:XmlNode, descend:Int) -> XmlNode
 	walkPrev: extern(mxmlWalkPrev) func (top:XmlNode, descend:Int) -> XmlNode
 	
+	// higher level utilities:
+	
+	/**
+	 * call a function for each child element
+	 */
+	eachChildElement: func (callback: Func(XmlNode)) {
+	    node := getFirstChild()
+	    while (node != null) {
+	        if (node getType() == XmlNodeType ELEMENT) {
+	            callback(node)
+	        }
+	        node = node getNextSibling()
+	    }
+	}
+
+	/** 
+	 * get an attribute with a default value 
+	 * (may be obsolete one day, if a null-coalescing operator is introduced to the language)
+	 */
+	getAttrDefault: func (name, def: String) -> String {
+		val := node getAttr(name)
+		return val ? val : def
+	}
+	
 	// Functions that return CStrings
 	_getAttr: extern(mxmlElementGetAttr) func (name:CString) -> CString
 	_getCDATA: extern(mxmlGetCDATA) func -> CString
