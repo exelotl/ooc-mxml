@@ -5,7 +5,7 @@
 		<item type="bow" />
 		<group name="gem pouch">
 			<item type="ruby" />
-			<item type="diamond" />
+			<item type="diamond">Might be fake</item>
 		</group>
 	</group>
 	<group name="body">

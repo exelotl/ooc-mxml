@@ -9,19 +9,42 @@ main: func {
 	
 	myData := tree findElement("my_data")
 	
-	"Now walking over everything:" println()
-	walk(myData)
+	
+	// By default, findElement uses MXML_DESCEND mode, so it will check sub-nodes too
+	
+	"\nfinding all the items:\n" println()
+	
+	item := myData findElement("item")
+	
+	while (item) {
+		item getAttr("type") println()
+		// 'myData' is the top node, so findElement returns null when it reaches the end of it
+		item = item findElement(myData, "item")
+	}
+	
+	// Using a custom function to read the data in more detail:
+	
+	"\nwalking more smartly over the data:\n" println()
+	myData eachChildElement(printInfo)
 	
 	tree delete()
 }
 
-walk: func (group:XmlNode) {
+
+indentLevel := 0
+
+printInfo: func (node: XmlNode) {
 	
-	item := group findElement("item")
+	"  " times(indentLevel) print()
 	
-	while (item) {
-		item getAttr("type") println()
-		item = item findElement(group, "item")
+	match (node getElement()) {
+		case "item" =>
+			desc := node getOpaque()
+			"item: %s %s" printfln(node getAttr("type"), desc ? "("+desc+")" : "")
+		case "group" =>
+			"group: %s" printfln(node getAttr("name"))
+			indentLevel += 1
+			node eachChildElement(printInfo)
+			indentLevel -= 1
 	}
-	
 }
