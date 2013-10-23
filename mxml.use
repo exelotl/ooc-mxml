@@ -1,6 +1,7 @@
 Name: Mini-XML
 Description: Simple library for reading and writing XML files.
 SourcePath: source
+Pkgs: mxml
 Includes: mxml.h
 Imports: mxml
 Libs: -lmxml, -lpthread
