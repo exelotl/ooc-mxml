@@ -1,3 +1,4 @@
 # ignore executables
 test
+walking
 *.exe

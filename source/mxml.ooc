@@ -25,22 +25,22 @@ MXML_ADD_AFTER: extern Int
 MXML_ADD_TO_PARENT: extern Int
 
 XmlSaxEvent: enum {
-	CDATA         : extern(MXML_SAX_CDATA)
-	COMMENT       : extern(MXML_SAX_COMMENT)
-	DATA          : extern(MXML_SAX_DATA)
-	DIRECTIVE     : extern(MXML_SAX_DIRECTIVE)
-	ELEMENT_CLOSE : extern(MXML_SAX_ELEMENT_CLOSE)
-	ELEMENT_OPEN  : extern(MXML_SAX_ELEMENT_OPEN)
+	cdata         : extern(MXML_SAX_CDATA)
+	comment       : extern(MXML_SAX_COMMENT)
+	data          : extern(MXML_SAX_DATA)
+	directive     : extern(MXML_SAX_DIRECTIVE)
+	element_close : extern(MXML_SAX_ELEMENT_CLOSE)
+	element_open  : extern(MXML_SAX_ELEMENT_OPEN)
 }
 
 XmlNodeType: enum {
-	IGNORE  : extern(MXML_IGNORE)
-	ELEMENT : extern(MXML_ELEMENT)
-	INTEGER : extern(MXML_INTEGER)
-	OPAQUE  : extern(MXML_OPAQUE)
-	REAL    : extern(MXML_REAL)
-	TEXT    : extern(MXML_TEXT)
-	CUSTOM  : extern(MXML_CUSTOM)
+	ignore  : extern(MXML_IGNORE)
+	element : extern(MXML_ELEMENT)
+	integer : extern(MXML_INTEGER)
+	opaque  : extern(MXML_OPAQUE)
+	real    : extern(MXML_REAL)
+	text    : extern(MXML_TEXT)
+	custom  : extern(MXML_CUSTOM)
 }
 
 Xml: class {
@@ -143,7 +143,7 @@ XmlNode: cover from mxml_node_t* {
 	eachChildElement: func (callback: Func(XmlNode)) {
 	    node := getFirstChild()
 	    while (node != null) {
-	        if (node getType() == XmlNodeType ELEMENT) {
+	        if (node getType() == XmlNodeType element) {
 	            callback(node)
 	        }
 	        node = node getNextSibling()
