@@ -4,4 +4,3 @@ SourcePath: source
 Pkgs: mxml
 Includes: mxml.h
 Imports: mxml
-Libs: -lmxml, -pthread
